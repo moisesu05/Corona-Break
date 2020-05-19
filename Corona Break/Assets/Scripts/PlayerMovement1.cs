@@ -1,26 +1,31 @@
-﻿using System.Collections;
+﻿ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement1 : MonoBehaviour{
     public Animator topAnimator;
     public Animator bottomAnimator;
+    
     public Vector3 movement;
     Vector3 aim ;
-    float speed;
+    Vector2 shootingDirection;
     
-    public float moveSpeed = 5f;
-    public float aimDistance = 0.4f;
-     Vector2 shootingDirection;
+    float speed;
+    public float moveSpeed = 2f;
+    public float aimDistance = 0.24f;
     public float bulletSpeed = 5.0f;
     public float fireRate = 0.5f;
-    private float nextFire = 0.0f;
+    private float nextFire = 0.2f;
 
     public Joystick joyStick;
     public Joystick aimJoyStick;
     
     public GameObject bulletPrefab;
     public GameObject crossHair;
+
+    public Rigidbody2D rb;
+
+    public float bulletTestAlign;
 
     void Update(){
 
@@ -50,7 +55,9 @@ public class PlayerMovement1 : MonoBehaviour{
       else{
         speed = 0;
       }
-      transform.position = transform.position + movement * Time.deltaTime;  
+      rb.velocity = movement;
+      // rb.velocity *= movement;
+      // transform.position = transform.position + movement * Time.deltaTime;  
     }
     void CharacterAnimation(){
 
@@ -110,8 +117,8 @@ public class PlayerMovement1 : MonoBehaviour{
     private void Fire(){
       if(Time.time>nextFire){
         nextFire = Time.time + fireRate;
-        GameObject bullet = Instantiate(bulletPrefab, crossHair.transform.position, Quaternion.identity);
-        bullet.GetComponent<Rigidbody2D>().velocity = shootingDirection * bulletSpeed;
+        GameObject bullet = Instantiate(bulletPrefab, transform.position + (Vector3.up * bulletTestAlign), Quaternion.identity);
+        bullet.GetComponent<Bullet>().velocity = shootingDirection * bulletSpeed;
         Destroy(bullet, 1.0f);
       }
       
