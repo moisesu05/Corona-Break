@@ -1,11 +1,9 @@
-﻿ using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerMovement1 : MonoBehaviour{
     public Animator topAnimator;
     public Animator bottomAnimator;
-    
+
     public Vector3 movement;
     Vector3 aim ;
     Vector2 shootingDirection;
@@ -16,17 +14,14 @@ public class PlayerMovement1 : MonoBehaviour{
     public float bulletSpeed = 5.0f;
     public float fireRate = 0.5f;
     private float nextFire = 0.2f;
+    public float bulletTestAlign;
 
     public Joystick joyStick;
     public Joystick aimJoyStick;
-    
     public GameObject bulletPrefab;
     public GameObject crossHair;
-
     public Rigidbody2D rb;
-
-    public float bulletTestAlign;
-
+    // public ParticleSystem dust;
     void Update(){
 
       PlayerMove();
@@ -36,10 +31,10 @@ public class PlayerMovement1 : MonoBehaviour{
     }
 
     void PlayerMove(){
-
+    
       movement = new Vector3(joyStick.Horizontal,joyStick.Vertical,0.0f);
       movement *= speed;
-
+      // CreateDust();
       if(joyStick.Horizontal >= .5f){
         speed = moveSpeed;
       } 
@@ -56,11 +51,8 @@ public class PlayerMovement1 : MonoBehaviour{
         speed = 0;
       }
       rb.velocity = movement;
-      // rb.velocity *= movement;
-      // transform.position = transform.position + movement * Time.deltaTime;  
     }
     void CharacterAnimation(){
-
         bottomAnimator.SetFloat("Horizontal", movement.x);
         bottomAnimator.SetFloat("Vertical", movement.y);
         bottomAnimator.SetFloat("Magnitude", movement.magnitude);
@@ -115,12 +107,19 @@ public class PlayerMovement1 : MonoBehaviour{
     }
 
     private void Fire(){
-      if(Time.time>nextFire){
-        nextFire = Time.time + fireRate;
+      if(Time.time > nextFire){
+        nextFire = Time.time + fireRate; 
+
         GameObject bullet = Instantiate(bulletPrefab, transform.position + (Vector3.up * bulletTestAlign), Quaternion.identity);
-        bullet.GetComponent<Bullet>().velocity = shootingDirection * bulletSpeed;
+        Bullet bulletScript = bullet.GetComponent<Bullet>();
+        bulletScript.velocity = shootingDirection * bulletSpeed;
+        bulletScript.sprayer = gameObject;
+        
         Destroy(bullet, 1.0f);
       }
-      
     }
+
+    // void CreateDust(){
+    //   dust.Play();  
+    // }
 }

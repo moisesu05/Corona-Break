@@ -202,3 +202,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: {x: 0, y: 0}
+  offset: {x: 0, y: -0.09}
+  sprayer: {fileID: 0}
