@@ -1,20 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class WaveTimer : MonoBehaviour
 {
-    public float timerValue;
+    private float timerValue;
     private bool runTimer = false;
     public Text timerText;
-    public UnityEvent timerEvent;    
-    public GameManager gameManager;
+    public UnityEvent timerEvent;   
 
     void Start(){
         HideTimerUI();
-        gameManager = GetComponent<GameManager>();
     }
     public void StartTimer(float startTimerValue){
         timerValue = startTimerValue;
@@ -42,7 +38,7 @@ public class WaveTimer : MonoBehaviour
         }
     }
     private void UpdateTimerUI(){
-        if(timerValue <= 0f){
+        if(timerValue <= 1f){
             timerText.text = "Start";
         }
         else{

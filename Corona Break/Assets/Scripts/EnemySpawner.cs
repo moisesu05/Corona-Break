@@ -2,12 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(GameManager))]
+[RequireComponent(typeof(WaveTimer))]
+[RequireComponent(typeof(WaveUI))]
 public class EnemySpawner : MonoBehaviour
 {
     private int currentWave = 0;
     private int enemiesInWave;
     private int enemiesToSpawn;
     private GameManager gameManager;
+    private WaveUI waveUI;
+    private WaveTimer waveTimer;
+
     public float waveDelay;
     public float spawnDelay = 0f;
     // public float spawnRate = 10f;
@@ -15,40 +21,41 @@ public class EnemySpawner : MonoBehaviour
     public GameObject enemyPrefab;    
     // public GameObject enemy;
     public Vector3 enemySpawnArea;
-    public WaveTimer waveTimer;
     
-    //TODO: Error on ine 23
+    //TODO: Error on ine 26
     //TODO: Main Menu
-    //TODO: Partices
-    void Start(){
+    //TODO: Particles
+    void Awake(){
         gameManager = GetComponent<GameManager>();
         waveTimer = GetComponent<WaveTimer>();
-        gameManager.HideUI();    
+        waveUI = GetComponent<WaveUI>();
+    }
+    void Start(){
+
+        waveUI.HideUI();
+    
     }
 
-    void StartWave(){
-
+    public void StartWave(){
+        
         if(gameManager.gameHasEnded){
             return;
         }
-       
+        
         currentWave += 1;
         
         enemiesInWave = enemyIncreasePerRound * currentWave;
         enemiesToSpawn = enemiesInWave;
 
-        gameManager.UpdateUI(currentWave, enemiesInWave);
+        waveUI.UpdateUI(currentWave, enemiesInWave);
         
         StartCoroutine(Spawn());
     }
-    void EndWave(){
-        gameManager.HideUI();
-        waveTimer.StartTimer(waveDelay);
-    }
+   
     IEnumerator Spawn(){
         for(int i = 0; i < enemiesToSpawn; i++){
 
-            if(gameManager.gameHasEnded == true){
+            if(gameManager.gameHasEnded){
                 break;
             }
 
@@ -56,19 +63,27 @@ public class EnemySpawner : MonoBehaviour
         }
         yield return new WaitForSeconds(spawnDelay);
     }
-   public Vector3 RandomSpawner(){
 
-        return  new Vector3(Random.Range(-enemySpawnArea.x /2, enemySpawnArea.x /2),
-                                                    Random.Range(-enemySpawnArea.y /2, enemySpawnArea.y /2), 0); 
-   }
-   void EnemyDied(){
+    void EndWave(){
+        waveUI.HideUI();
+        FindObjectOfType<AudioManager>().Play("WaveComplete");
+        waveTimer.StartTimer(waveDelay);
+    }
+
+    public void EnemyDied(){
         enemiesInWave -= 1;  
 
-        gameManager.UpdateUI(currentWave, enemiesInWave);
+        waveUI.UpdateUI(currentWave, enemiesInWave);
 
         if(enemiesInWave == 0){
            EndWave();
         }
+   }
+
+     public Vector3 RandomSpawner(){
+
+        return  new Vector3(Random.Range(-enemySpawnArea.x /2, enemySpawnArea.x /2),
+                                                    Random.Range(-enemySpawnArea.y /2, enemySpawnArea.y /2), 0); 
    }
 }
   // void Update()

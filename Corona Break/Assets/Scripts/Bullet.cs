@@ -2,9 +2,16 @@
 
 public class Bullet : MonoBehaviour
 {
+   private EnemySpawner spawner;
+   public GameObject bulletParticle;
+   public GameObject enemyParticle;
+   public GameObject sprayer;
    public Vector2 velocity =  new Vector2(0.0f, 0.0f);
    public Vector2 offset = new Vector2(0.0f, 0.0f);
-   public GameObject sprayer;
+   
+   void Start(){
+       spawner = FindObjectOfType<EnemySpawner>();
+   }
    void Update(){
 
        Vector2 currentPosition = new Vector2(transform.position.x , transform.position.y);
@@ -19,14 +26,21 @@ public class Bullet : MonoBehaviour
            if(other != sprayer){
             //    Debug.Log(hit.collider.gameObject);
                 if(other.CompareTag("Enemy")){
+                    BulletParticle();
+                    EnemyParticle();
 
+                    FindObjectOfType<AudioManager>().Play("EnemyHit");
+                    spawner.EnemyDied();
+                    
                     Destroy(gameObject);
                     Destroy(other);
+
                     Debug.Log(other.name);
                     break;
                 }
                 if(other.CompareTag("Walls")){
-
+                    BulletParticle();
+                    FindObjectOfType<AudioManager>().Play("WallHit");
                     Destroy(gameObject);
                     Debug.Log(other.name);
                     break;
@@ -35,4 +49,10 @@ public class Bullet : MonoBehaviour
        }
        transform.position = newPosition;
    } 
+    void BulletParticle(){
+      Instantiate(bulletParticle, transform.position, Quaternion.identity);  
+    }
+    public void EnemyParticle(){
+      Instantiate(enemyParticle, transform.position, Quaternion.identity);  
+    }
 }

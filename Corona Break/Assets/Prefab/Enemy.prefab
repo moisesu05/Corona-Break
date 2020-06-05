@@ -114,8 +114,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5ba421ba8c67294a9584e2b27e384b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.2
+  speed: 0.3
   stoppingDistance: 0
+  enemyParticle: {fileID: 4700127701083876003, guid: 72d268328a7b72947a644f494b0dc6fd,
+    type: 3}
 --- !u!210 &-8761400728192247512
 SortingGroup:
   m_ObjectHideFlags: 0

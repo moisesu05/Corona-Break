@@ -21,7 +21,7 @@ public class PlayerMovement1 : MonoBehaviour{
     public GameObject bulletPrefab;
     public GameObject crossHair;
     public Rigidbody2D rb;
-    // public ParticleSystem dust;
+    
     void Update(){
 
       PlayerMove();
@@ -34,7 +34,6 @@ public class PlayerMovement1 : MonoBehaviour{
     
       movement = new Vector3(joyStick.Horizontal,joyStick.Vertical,0.0f);
       movement *= speed;
-      // CreateDust();
       if(joyStick.Horizontal >= .5f){
         speed = moveSpeed;
       } 
@@ -110,6 +109,7 @@ public class PlayerMovement1 : MonoBehaviour{
       if(Time.time > nextFire){
         nextFire = Time.time + fireRate; 
 
+        FindObjectOfType<AudioManager>().Play("GunSound");
         GameObject bullet = Instantiate(bulletPrefab, transform.position + (Vector3.up * bulletTestAlign), Quaternion.identity);
         Bullet bulletScript = bullet.GetComponent<Bullet>();
         bulletScript.velocity = shootingDirection * bulletSpeed;
@@ -118,8 +118,4 @@ public class PlayerMovement1 : MonoBehaviour{
         Destroy(bullet, 1.0f);
       }
     }
-
-    // void CreateDust(){
-    //   dust.Play();  
-    // }
 }
