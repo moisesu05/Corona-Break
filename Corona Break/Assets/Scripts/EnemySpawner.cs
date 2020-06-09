@@ -32,7 +32,7 @@ public class EnemySpawner : MonoBehaviour
     }
     void Start(){
 
-        waveUI.HideUI();
+        waveUI.UpdateUI(currentWave, enemiesInWave);
     
     }
 

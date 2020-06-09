@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7249869532795175664}
   - component: {fileID: 6024233940850043152}
   - component: {fileID: 7710448506198578912}
+  - component: {fileID: 4182346718284194323}
   m_Layer: 0
   m_Name: bullet 1 1 1
   m_TagString: Bullet
@@ -27,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3766128576069709893}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.78, y: 0.82, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.843, y: 0.952, z: 0}
+  m_LocalScale: {x: 1.5529467, y: 1.5529467, z: 1.5529467}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -132,7 +133,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.33333334
+        value: 0.433334
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -208,3 +209,27 @@ MonoBehaviour:
   sprayer: {fileID: 0}
   velocity: {x: 0, y: 0}
   offset: {x: 0, y: -0.09}
+--- !u!114 &4182346718284194323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3766128576069709893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4a16c3bf2450264ba74796ba96a6644, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enSplash1: {fileID: 8403231026141218052, guid: 4cb9434a53a8fd04b8c0cabb7ec03c18,
+    type: 3}
+  enSplash2: {fileID: 7342289722296167037, guid: f99127311f9c4e6449c6b2db1b5cf7f4,
+    type: 3}
+  enSplash3: {fileID: 428823149937736785, guid: ba4b7db7bc2d50943af8e10336a9c14b,
+    type: 3}
+  plSplash4: {fileID: 5571018141983200719, guid: 6e81c85e570e5a24c89f12845611399b,
+    type: 3}
+  plSplash5: {fileID: 4343175562935373709, guid: efcd406390c19a14cb59d5fdb9feb28c,
+    type: 3}
+  plSplash6: {fileID: 5861434391464945712, guid: dc86c52e784da4c4abb295544275b33d,
+    type: 3}

@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: c4a16c3bf2450264ba74796ba96a6644
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - enSplash1: {fileID: 8403231026141218052, guid: 4cb9434a53a8fd04b8c0cabb7ec03c18,
+      type: 3}
+  - enSplash2: {fileID: 7342289722296167037, guid: f99127311f9c4e6449c6b2db1b5cf7f4,
+      type: 3}
+  - enSplash3: {fileID: 428823149937736785, guid: ba4b7db7bc2d50943af8e10336a9c14b,
+      type: 3}
+  - plSplash4: {fileID: 5571018141983200719, guid: 6e81c85e570e5a24c89f12845611399b,
+      type: 3}
+  - plSplash5: {fileID: 4343175562935373709, guid: efcd406390c19a14cb59d5fdb9feb28c,
+      type: 3}
+  - plSplash6: {fileID: 5861434391464945712, guid: dc86c52e784da4c4abb295544275b33d,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

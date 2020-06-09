@@ -28,5 +28,6 @@ public class Enemy : MonoBehaviour
     }
     void EnemyParticle(){
       Instantiate(enemyParticle, transform.position, Quaternion.identity);  
+      
     }
 }

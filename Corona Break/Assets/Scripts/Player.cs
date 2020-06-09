@@ -6,9 +6,15 @@ public class Player : MonoBehaviour
     public int currentHealth;
     public HealthBar healthBar;
     public GameObject playerParticle;
+    private BloodSplashRandom bloodSplash;
+    private CameraShake shake;
 
+    void Awake(){
+       bloodSplash = FindObjectOfType<BloodSplashRandom>();                 
+    }
     void Start()
     {
+        shake = Camera.main.GetComponent<CameraShake  >();
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
     }
@@ -28,7 +34,9 @@ public class Player : MonoBehaviour
             Destroy(other);
             FindObjectOfType<EnemySpawner>().EnemyDied();
             PlayerParticle();
+            bloodSplash.SpawnEnemySplash();
             FindObjectOfType<AudioManager>().Play("PlayerHit");
+            StartCoroutine(shake.Shake(.14f, .4f));
 
             if (currentHealth == 0){
               FindObjectOfType<AudioManager>().Play("PlayerDeath");

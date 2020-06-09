@@ -8,8 +8,13 @@ public class Bullet : MonoBehaviour
    public GameObject sprayer;
    public Vector2 velocity =  new Vector2(0.0f, 0.0f);
    public Vector2 offset = new Vector2(0.0f, 0.0f);
+   private BloodSplashRandom bloodSplash;
+
+   private RipplePostProcessor camRipple;
    
    void Start(){
+       camRipple = Camera.main.GetComponent<RipplePostProcessor>();
+       bloodSplash = FindObjectOfType<BloodSplashRandom>();
        spawner = FindObjectOfType<EnemySpawner>();
    }
    void Update(){
@@ -28,13 +33,13 @@ public class Bullet : MonoBehaviour
                 if(other.CompareTag("Enemy")){
                     BulletParticle();
                     EnemyParticle();
-
+                    camRipple.RippleEffect();
                     FindObjectOfType<AudioManager>().Play("EnemyHit");
                     spawner.EnemyDied();
                     
                     Destroy(gameObject);
                     Destroy(other);
-
+                    bloodSplash.SpawnEnemySplash();
                     Debug.Log(other.name);
                     break;
                 }
