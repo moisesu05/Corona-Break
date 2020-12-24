@@ -4,4 +4,4 @@
 ![image og Corona Break 3of3](https://img.itch.zone/aW1hZ2UvNzI5MzI4LzQwNTIyMzcucG5n/original/i7aB%2Bn.png)
 #
 
-Personal Game Project using **UNITY3D** in **C#**.
+A Simple Personal Game Project using **UNITY3D** in **C#**.
